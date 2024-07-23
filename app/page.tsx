@@ -57,10 +57,16 @@ export default async function Home({
   console.log("chars", characters);
   if (!searchParams.location) {
   }
+
+  const statusColors = {
+    Alive: "bg-green-800",
+    Dead: "bg-red-900",
+    unknown: "bg-gray-600",
+  };
   return (
     <main className="flex min-h-screen flex-col gap-4 p-24 bg-slate-900">
       <Filter locations={locations} searchParams={searchParams} />
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid xl:grid-cols-5 gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {characters
           .filter((char) => {
             if (searchParams.status) {
@@ -72,31 +78,25 @@ export default async function Home({
           .map((character: PersonRoot) => (
             <Card
               key={character.id}
-              className="bg-gray-600 pt-4 grid grid-cols-3"
+              className={`${
+                statusColors[character.status as keyof typeof statusColors]
+              } border-none`}
             >
-              <CardContent className="col-span-1 x">
+              <CardContent className="px-4 pt-2 rounded-lg ">
                 <Image
                   src={character.image}
                   alt={character.name}
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover "
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </CardContent>
 
-              <div>
+              <div className="px-4 pb-2 space-y-2 ">
                 <CardTitle className="text-white">{character.name}</CardTitle>
-                <div className="flex text-white flex-col items-start gap-2">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className={`${
-                        character.status === "Alive"
-                          ? "bg-green-400"
-                          : "bg-red-600"
-                      } w-2 h-2 rounded-xl`}
-                    />
-                    {character.status} - {character.species}
-                  </div>
+                <div className="flex text-white gapp-2 flex-col items-start">
+                  <div className="flex items-center ">{character.status}</div>
+                  <div>Species: {character.species}</div>
                   <div>Last Known Location: {character.location.name}</div>
                 </div>
               </div>

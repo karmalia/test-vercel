@@ -46,7 +46,7 @@ const Filter = ({ locations, searchParams }: Props) => {
 
   return (
     <div>
-      <form className="flex gap-12  ">
+      <form className="flex md:gap-12 gap-4 flex-wrap">
         <div className="flex gap-2 items-center">
           <label className="text-white" htmlFor="location">
             Location
