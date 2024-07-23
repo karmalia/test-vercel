@@ -46,8 +46,8 @@ const Filter = ({ locations, searchParams }: Props) => {
 
   return (
     <div>
-      <form className="flex gap-4">
-        <div className="flex gap-2">
+      <form className="flex gap-12  ">
+        <div className="flex gap-2 items-center">
           <label className="text-white" htmlFor="location">
             Location
           </label>
@@ -65,14 +65,14 @@ const Filter = ({ locations, searchParams }: Props) => {
             ))}
           </select>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
           <label className="text-white" htmlFor="status">
             Status
           </label>
           <select
             name="status"
             id="status"
-            value={status}
+            value={status || "All"}
             onChange={handleStatus}
             className="p-2 bg-gray-800 text-white"
           >
