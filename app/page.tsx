@@ -31,7 +31,7 @@ const getData = async (location?: string) => {
 
   const response = await fetch(baseUrl);
   const data = await response.json();
-  const locations = data.results.map((res) => res.name);
+  const locations = data.results.map((res: any) => res.name);
   let chars = [];
   if (!location) {
     console.log("2");
@@ -41,7 +41,7 @@ const getData = async (location?: string) => {
     return { locations, characters };
   } else {
     console.log("1");
-    chars = await data.results.find((res: Location) => location === res.name)
+    chars = await data.results.find((res: Result) => location === res.name)
       .residents;
     const characters = await fetchChars(chars);
     return { locations, characters };
